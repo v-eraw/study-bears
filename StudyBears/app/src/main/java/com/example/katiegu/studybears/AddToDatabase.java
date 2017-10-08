@@ -4,7 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,22 +16,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class CreateAccount extends AppCompatActivity {
-    private static final String TAG = "CreateAccount";
+public class AddToDatabase extends AppCompatActivity {
+
+    private static final String TAG = "AddToDatabase";
+
+    private Button btnSubmit;
+    private EditText mName, mEmail, mSchool, mPassword;
+    private String userID;
+
     private FirebaseDatabase mFireBaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
-    private String userID;
-
-    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
-
-        mListView = (ListView) findViewById(R.id.listview);
+        setContentView(R.layout.activity_add_to_database);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        mName = (EditText) findViewById(R.id.etName);
+        mEmail = (EditText) findViewById(R.id.etEmail);
+        mSchool = (EditText) findViewById(R.id.etSchool);
+        mPassword = (EditText) findViewById(R.id.etPassword);
 
         mAuth = FirebaseAuth.getInstance();
         mFireBaseDatabase = FirebaseDatabase.getInstance();
@@ -54,23 +61,16 @@ public class CreateAccount extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                showData(dataSnapshot);
+                Log.d(TAG,"onDataChange: Added information to database. \n" + dataSnapshot.getValue());
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Log.d(TAG,"Failed to read value." + databaseError.toException());
             }
-        }
-
-        private void showData(DataSnapshot dataSnapshot) {
-            for (DataSnapshot ds: dataSnapshot.getChildren()) {
-                UserInformation uInfo = new UserInformation();
-
-            }
-        }
+        });
     }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -93,5 +93,4 @@ public class CreateAccount extends AppCompatActivity {
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
 }

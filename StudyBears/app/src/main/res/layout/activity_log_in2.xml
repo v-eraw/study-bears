@@ -46,6 +46,15 @@
                 android:textStyle="bold" />
 
             <Button
+                android:id="@+id/view_database_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="View Database"
+                android:textStyle="bold" />
+
+            <Button
                 android:id="@+id/create_account_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"

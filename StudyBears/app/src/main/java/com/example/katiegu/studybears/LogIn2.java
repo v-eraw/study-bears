@@ -21,7 +21,7 @@ public class LogIn2 extends AppCompatActivity {
 
     //UI References
     private EditText mEmail, mPassword;
-    private Button btnSignIn, btnCreateAccount;
+    private Button btnSignIn, btnViewDatabase, btnCreateAccount;
 
 
     @Override
@@ -33,6 +33,7 @@ public class LogIn2 extends AppCompatActivity {
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
         btnSignIn = (Button) findViewById(R.id.email_sign_in_button);
+        btnViewDatabase = (Button) findViewById(R.id.view_database_button);
         btnCreateAccount = (Button) findViewById(R.id.create_account_button);
 
         mAuth = FirebaseAuth.getInstance();
@@ -63,14 +64,23 @@ public class LogIn2 extends AppCompatActivity {
             }
         });
 
-        btnCreateAccount.setOnClickListener(new View.OnClickListener() {
+        btnViewDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LogIn2.this, CreateAccount.class);
+                Intent intent = new Intent(LogIn2.this, ViewDatabase.class);
                 startActivity(intent);
             }
 
-});
+        });
+
+        btnCreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LogIn2.this, AddToDatabase.class);
+                startActivity(intent);
+            }
+        });
+
     }
     @Override
     public void onStart() {
