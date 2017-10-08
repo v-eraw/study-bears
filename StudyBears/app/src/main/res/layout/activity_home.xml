@@ -25,7 +25,8 @@
         android:text="Sign Up"
         android:textColor="@color/white"
         android:background="@color/colorPrimaryDark"
-        tools:layout_editor_absoluteX="161dp"
+        android:onClick="toSignUp"
+        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="90dp" />
 
     <Button
@@ -35,6 +36,8 @@
         android:text="Log In"
         android:textColor="@color/white"
         android:background="@color/colorPrimaryDark"
+        android:onClick="toLogIn"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="227dp" />
+
 </android.support.constraint.ConstraintLayout>
